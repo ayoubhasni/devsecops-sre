@@ -1,2 +1,4 @@
 Flask==2.3.3
 prometheus-flask-exporter==0.22.4
+pytest
+flake8
