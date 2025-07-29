@@ -1,8 +1,12 @@
+from datetime import datetime
 
+incident_time = datetime.now().strftime("%d %B %Y à %H:%M")
+
+report = f"""
 # Rapport d’incident - API TODO : Erreur 500 simulée
 
 ## Contexte
-Le 29 July 2025 à 14:54, dans le cadre du TD DevSecOps/SRE, une panne simulée a été déclenchée sur l’API TODO. Cette API est une application Flask gérant une liste de tâches. La simulation a consisté à appeler volontairement l’endpoint `/error` qui provoque une erreur interne (division par zéro).
+Le {incident_time}, dans le cadre du TD DevSecOps/SRE, une panne simulée a été déclenchée sur l’API TODO. Cette API est une application Flask gérant une liste de tâches. La simulation a consisté à appeler volontairement l’endpoint `/error` qui provoque une erreur interne (division par zéro).
 
 ## Détection et diagnostic
 L’incident a été détecté via le monitoring Prometheus et Grafana, avec une montée rapide du taux d’erreurs HTTP 5xx sur l’API. Les logs de l’application Flask ont confirmé une exception `ZeroDivisionError` liée à l’endpoint `/error`. Cette détection a permis de valider l’efficacité du système de monitoring et des métriques exposées.
@@ -22,4 +26,10 @@ Aucune correction n’a été nécessaire puisque l’erreur était volontaire e
 ---
 
 **Rédigé automatiquement par script**  
-**Date :** 29 July 2025 à 14:54
+**Date :** {incident_time}
+"""
+
+with open("incident-report.md", "w", encoding="utf-8") as f:
+    f.write(report)
+
+print("Rapport d’incident généré dans incident-report.md")
