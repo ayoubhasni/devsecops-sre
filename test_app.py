@@ -9,7 +9,7 @@ def client():
 def test_health(client):
     response = client.get('/health')
     assert response.status_code == 200
-    assert response.data == b'OK'
+    assert response.get_json() == {"status": "healthy"}
 
 def test_create_task(client):
     response = client.post('/tasks', json={'title': 'Tâche test'})
